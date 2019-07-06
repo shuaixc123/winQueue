@@ -14,9 +14,12 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.*;
+
+import static java.lang.Thread.sleep;
 
 @Service
 public class WinInfoService implements IWinInfoService {
@@ -32,7 +35,6 @@ public class WinInfoService implements IWinInfoService {
 
     @Autowired
     private IWinQueueDao winQueueDao;
-
 
     public Result init() {
         if (!StringUtils.isNullOrEmpty(InitConst.initFilePath)) {
@@ -205,16 +207,13 @@ public class WinInfoService implements IWinInfoService {
         return true;
     }
 
-    public WinQueueDTO getQueueNo(final String empNo,final int items) {
-       return doQueryNoDetail(empNo, items);
-    }
-
-    private WinQueueDTO doQueryNoDetail(String empNo, int items) {
+    @Transactional
+    public WinQueueDTO doQueryNoDetail(String empNo, int items) {
         //将sys_info的locakNum设置为1，进行独占操作
         int isLock = sysInfoDao.lockNum();
         if (isLock == 0) {
             try {
-                Thread.sleep(100);
+                sleep(100);
                 return doQueryNoDetail(empNo, items);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -330,5 +329,8 @@ public class WinInfoService implements IWinInfoService {
         result.setEmployeeNo(newWinQueue.getEmployeeno());
         return result;
     }
+
+
+
 
 }

@@ -9,5 +9,5 @@ public interface IWinInfoService {
 
     Result init();
 
-    WinQueueDTO getQueueNo(String empNo, int items);
+    WinQueueDTO doQueryNoDetail(String empNo, int items);
 }

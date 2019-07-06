@@ -9,4 +9,6 @@ public interface IWinInfoController {
 
     WinQueueDTO getQueueNo(String empNo, int items);
 
+    WinQueueDTO doQueryNoDetail(String empNo, int items);
+
 }
