@@ -14,7 +14,7 @@ spring:
     #配置用户名
     username: root
     #配置密码
-    password: 123456
+    password: root
     driver-class-name: com.mysql.jdbc.Driver
     #下面为连接池相关配置
   dbcp2:

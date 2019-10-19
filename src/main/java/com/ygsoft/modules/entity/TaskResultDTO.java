@@ -1,15 +1,14 @@
 package com.ygsoft.modules.entity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Vector;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class TaskResultDTO {
 
-    private List<TastDTO> taskList = new ArrayList<TastDTO>();
+    private Vector<TastDTO> taskList = new Vector <TastDTO>();
 
-    private Map<String, WinQueueDTO> taskResultMap = new HashMap<String, WinQueueDTO>();
+    private Map<String, WinQueueDTO> taskResultMap = new ConcurrentHashMap<String, WinQueueDTO>();
 
     public boolean isEmpty() {
         return taskList.isEmpty();
